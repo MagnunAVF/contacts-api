@@ -1,0 +1,25 @@
+service: contacts-api
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: go1.x
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    noPrependStageInUrl: true
+
+functions:
+  health:
+    handler: bin/health
+    package:
+      include:
+        - ./bin/health
+    events:
+      - httpApi:
+          path: /health
+          method: get
+
