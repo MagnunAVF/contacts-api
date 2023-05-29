@@ -3,6 +3,7 @@ package api
 import (
 	"log"
 
+	"github.com/MagnunAVF/contacts-api/api/handlers"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,9 +14,11 @@ func init() {
 
 	R = gin.Default()
 
-	R.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	R.GET("/health", handlers.HealthHandler)
+
+	R.GET("/contacts", handlers.GetContactsHandler)
+	R.GET("/contacts/:id", handlers.GetContactHandler)
+	R.POST("/contacts", handlers.CreateContactHandler)
+	R.PUT("/contacts/:id", handlers.UpdateContactHandler)
+	R.DELETE("/contacts/:id", handlers.DeleteContactHandler)
 }
