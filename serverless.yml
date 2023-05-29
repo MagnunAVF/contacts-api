@@ -1,25 +1,30 @@
 service: contacts-api
+
 frameworkVersion: "3"
 
 provider:
   name: aws
   runtime: go1.x
+  region: us-east-1
 
 plugins:
   - serverless-offline
+
+package:
+  individually: true
+  exclude:
+    - ./**
+  include:
+    - ./bin/**
 
 custom:
   serverless-offline:
     noPrependStageInUrl: true
 
 functions:
-  health:
-    handler: bin/health
-    package:
-      include:
-        - ./bin/health
+  api:
+    handler: bin/api
     events:
-      - httpApi:
-          path: /health
-          method: get
-
+      - http:
+          path: "{proxy+}"
+          method: any
