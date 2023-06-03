@@ -12,7 +12,7 @@ zip: build
 	sh zip.sh
 
 start: build
-	sls offline --useDocker start --host 0.0.0.0
+	sls offline start --useDocker start --host 0.0.0.0
 
 deploy: build
 	sls deploy --verbose --aws-profile $(AWS_PROFILE)
