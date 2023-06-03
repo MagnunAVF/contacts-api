@@ -22,9 +22,9 @@ custom:
     noPrependStageInUrl: true
 
 functions:
-  api:
-    handler: bin/api
+  health:
+    handler: bin/health
     events:
       - http:
-          path: "{proxy+}"
-          method: any
+          path: /health
+          method: GET
