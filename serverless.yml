@@ -7,6 +7,19 @@ provider:
   runtime: go1.x
   region: us-east-1
   stage: '${opt:stage, "dev"}'
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
+            - dynamodb:GetItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+            - dynamodb:Scan
+            - dynamodb:Query
+          Resource:
+            - "arn:aws:dynamodb:${self:provider.region}:*:table/contacts-${self:provider.stage}"
 
 plugins:
   - serverless-dotenv-plugin
