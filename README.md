@@ -28,10 +28,10 @@ make start
 ## Deploy
 Run in terminal:
 ```
-make deploy AWS_PROFILE=<your_aws_profile>
+make deploy AWS_PROFILE=<your_aws_profile> STAGE=<stage>
 ```
 
 To remove the deployed stack:
 ```
-make destroy AWS_PROFILE=<your_aws_profile>
+make destroy AWS_PROFILE=<your_aws_profile> STAGE=<stage>
 ```
