@@ -42,3 +42,23 @@ functions:
       - http:
           path: /health
           method: GET
+
+resources:
+  Resources:
+    ContactsDynamoDBTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: "contacts-${self:provider.stage}"
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S # Assuming id is a string attribute for UUID
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH # Making id the partition key
+          - AttributeName: email
+            KeyType: RANGE # Making name the sort key (range key)
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
