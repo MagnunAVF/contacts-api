@@ -20,3 +20,6 @@ bin
 node_modules
 
 .dynamodb
+
+.env*
+!.env.sample

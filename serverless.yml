@@ -6,8 +6,10 @@ provider:
   name: aws
   runtime: go1.x
   region: us-east-1
+  stage: '${opt:stage, "dev"}'
 
 plugins:
+  - serverless-dotenv-plugin
   - serverless-dynamodb-local
   - serverless-offline
 
