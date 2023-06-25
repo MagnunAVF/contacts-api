@@ -9,8 +9,13 @@ A simple contacts book REST API. Using Go, Serverless Framework and AWS.
 * AWS account
 
 ## Setup
-Run in terminal:
+Create .env file:
+```shell
+cp .env.sample .env
 ```
+
+Run in terminal:
+```shell
 npm install
 serverless dynamodb install
 ```
