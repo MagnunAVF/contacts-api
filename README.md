@@ -11,7 +11,7 @@ A simple contacts book REST API. Using Go, Serverless Framework and AWS.
 ## Setup
 Create .env file:
 ```shell
-cp .env.sample .env
+make setup-local-env
 ```
 
 Run in terminal:
