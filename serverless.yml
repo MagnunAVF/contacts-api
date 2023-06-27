@@ -55,6 +55,12 @@ functions:
       - http:
           path: /health
           method: GET
+  create-contact:
+    handler: bin/create-contact
+    events:
+      - http:
+          path: /contacts
+          method: POST
 
 resources:
   Resources:
