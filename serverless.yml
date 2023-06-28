@@ -61,6 +61,12 @@ functions:
       - http:
           path: /contacts
           method: POST
+  get-contacts:
+    handler: bin/get-contacts
+    events:
+      - http:
+          path: /contacts
+          method: GET
 
 resources:
   Resources:

@@ -11,6 +11,7 @@ import (
 )
 
 var Client *dynamodb.Client
+var TableName string = "contacts-" + os.Getenv("ENV")
 
 func CreateClient(ctx context.Context) error {
 	var cfg aws.Config
