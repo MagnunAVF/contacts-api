@@ -67,6 +67,12 @@ functions:
       - http:
           path: /contacts
           method: GET
+  get-contact-by-id:
+    handler: bin/get-contact-by-id
+    events:
+      - http:
+          path: /contacts/{id}/{email}
+          method: GET
 
 resources:
   Resources:

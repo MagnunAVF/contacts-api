@@ -5,6 +5,7 @@ import (
 
 	"github.com/MagnunAVF/contacts-api/models"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	"github.com/google/uuid"
@@ -75,4 +76,31 @@ func GetContacts(ctx context.Context, limit int32, lastEvaluatedID string, lastE
 	}
 
 	return contacts, lastEvaluatedIDToReturn, lastEvaluatedEmailToReturn, nil
+}
+
+func GetContactByID(ctx context.Context, contactID string, email string) (*models.Contact, error) {
+	err := CreateClient(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	params := &dynamodb.GetItemInput{
+		TableName: aws.String(TableName),
+		Key: map[string]types.AttributeValue{
+			"id":    &types.AttributeValueMemberS{Value: contactID},
+			"email": &types.AttributeValueMemberS{Value: email},
+		},
+	}
+
+	res, err := Client.GetItem(ctx, params)
+	if err != nil {
+		return nil, err
+	}
+
+	var contact models.Contact
+	if err = attributevalue.UnmarshalMap(res.Item, &contact); err != nil {
+		return nil, err
+	}
+
+	return &contact, nil
 }
